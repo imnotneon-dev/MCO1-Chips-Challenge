@@ -5,11 +5,22 @@ public class Maps {
     private int startX;
     private int startY;
 
-    public Maps(char[][] tiles, int requiredChips, int startX, int startY) {
+    public Maps(char[][] tiles, int requiredChips) {
         this.tiles = tiles;
         this.chips = requiredChips;
-        this.startX = startX;
-        this.startY = startY;
+        findStartPosition();
+    }
+
+    public int[] findStartPosition() {
+        for (int y = 0; y < tiles.length; y++) {
+            for (int x = 0; x < tiles[y].length; x++) {
+                if (tiles[y][x] == '@') {
+                    this.startX = x;
+                    this.startY = y;
+                }
+            }
+        }
+        return new int[] {0, 0}; // fallback
     }
 
     public int getStartX() {
@@ -20,6 +31,9 @@ public class Maps {
         return startY;
     }
 
+    public char[][] getMap() {
+        return tiles;
+    }
     public char getTile(int x, int y) {
         return tiles[y][x];
     }

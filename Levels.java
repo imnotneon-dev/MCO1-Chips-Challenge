@@ -93,6 +93,14 @@ public class Levels {
         return new Levels(grid, chips);
     }
 
+    public char[][] getMap() {
+        return map;
+    }
+
+    public int getChips() {
+        return chips;
+    }
+
     private static int countChips(char[][] map) {
         int count = 0;
         for (int y = 0; y < map.length; y++) {          

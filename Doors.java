@@ -14,14 +14,6 @@ public class Doors {
         return tile == RED || tile == BLUE;
     }
 
-    public char getDoorColor(char tile) {
-        if (tile == RED) 
-            return 'R';
-        if (tile == BLUE) 
-            return 'B';
-        return '-';
-    }
-
     public boolean isLocked() {
         return locked;
     }

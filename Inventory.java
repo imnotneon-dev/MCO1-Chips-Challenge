@@ -59,4 +59,20 @@ public class Inventory {
         blueKeys--;
     }
 
+    public int getRedKeys() {
+        return redKeys;
+    }
+
+    public int getBlueKeys() {
+        return blueKeys;
+    }
+
+    public void resetInventory() {
+        redKeys = 0;
+        blueKeys = 0;
+        hasFlippers = false;
+        hasFireBoots = false;
+        chips = 0;
+    }
+
 }

@@ -7,14 +7,20 @@ public class NextLevel {
     public NextLevel(Maps[] levels, int[] requiredChips) {
         this.levels = levels;
         this.requiredChips = requiredChips;
-        currentLevel = 0;
+        this.currentLevel = 0;
     }
 
     public Maps getCurrentMap() {
         return levels[currentLevel];
     }
 
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
     public boolean canAdvance(int collectedChips) {
+        if (currentLevel >= requiredChips.length) 
+            return false;
         return collectedChips >= requiredChips[currentLevel];
     }
 
@@ -25,5 +31,4 @@ public class NextLevel {
         }
         return false; 
     }
-
 }
