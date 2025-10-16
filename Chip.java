@@ -47,8 +47,7 @@ public class Chip {
                 return "blocked";
             }
         }
-
-        // ✅ Check exit first before replacing with '@'
+        
         if (tile == Tiles.EXIT) {
             if (INVENTORY.getChips() >= map.getRequiredChips()) {
                 return "exit";

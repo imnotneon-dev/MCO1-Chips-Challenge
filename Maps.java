@@ -20,7 +20,7 @@ public class Maps {
                 }
             }
         }
-        return new int[] {0, 0}; // fallback
+        return new int[] {0, 0};
     }
 
     public int getStartX() {
