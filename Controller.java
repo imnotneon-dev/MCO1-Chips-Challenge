@@ -44,7 +44,7 @@ public class Controller {
                 break;
             }
 
-            String moved = chip.move(move, currentMap);
+            String moved = chip.move(move, currentMap); //one causing blocks
             if (moved.equals("blocked")) {
                 System.out.println("Cannot move there!");
             }
@@ -61,23 +61,28 @@ public class Controller {
                     chip.getInventory().resetInventory();
                     System.out.println("Level " + (nextLevel.getCurrentLevel() + 1) + " Start!");
                 } else {
-                    System.out.println("🎉 You completed all levels!");
-                    break;
+                    System.out.println("You completed all levels!");
+                    break; //removed emoji
                 }
             }
 
             if (!chip.isAlive() && moved.equals("died")) {
-                System.out.println("You died! Restarting level...");
-                resetLevel();
+                System.out.println("You died! Restarting level..."); 
+                resetLevel(); //cannot move after revive
             }
         }
     }
 
-    private void resetLevel() {
-        System.out.println("You died! Restarting level...");
+    private void resetLevel() { //resetLevel fixed 
+        System.out.println();//"You died! Restarting level...");
+        currentMap = nextLevel.getCurrentMap();
+        
+        chip.revive(); //moved to top
         chip.getInventory().resetInventory(); 
-        chip.setX(currentMap.getStartX());
+        currentMap = nextLevel.getCurrentMap();
+        chip.setX(currentMap.getStartX()); //returns chip
         chip.setY(currentMap.getStartY());
-        chip.revive();
+
+        currentMap.setTile(chip.getX(), chip.getY(), Chip.CHIP); 
     }
 }
