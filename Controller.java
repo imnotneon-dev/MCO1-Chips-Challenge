@@ -74,7 +74,7 @@ public class Controller {
     }
 
     private void resetLevel() { //resetLevel fixed 
-        System.out.println();//"You died! Restarting level...");
+        System.out.println(); //"You died! Restarting level...");
         currentMap = nextLevel.getCurrentMap();
         
         chip.revive(); //moved to top

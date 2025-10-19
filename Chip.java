@@ -72,7 +72,10 @@ public class Chip {
                 Tiles.applyForce(this, map);
             }
 
-            return isAlive() ? "moved" : "died";
+            if (isAlive())
+                return "moved";
+            else
+                return "died";
         }
 
     //implemented to not destroy water and fire tiles upon steps
@@ -80,13 +83,15 @@ public class Chip {
         if (tile == Tiles.WATER) {
             if (INVENTORY.hasFlippers()) {
                 map.setTile(x, y, getCurrentTileBelow());
-                x = newX; y = newY;
+                x = newX; 
+                y = newY;
                 setCurrentTileBelow(tile);
                 map.setTile(x, y, Chip.CHIP);
                 return "moved";
             } else {
                 map.setTile(x, y, getCurrentTileBelow());
-                x = newX; y = newY;
+                x = newX; 
+                y = newY;
                 setCurrentTileBelow(tile);
                 map.setTile(x, y, Chip.CHIP);
                 die();
@@ -98,13 +103,15 @@ public class Chip {
         if (tile == Tiles.FIRE) {
             if (INVENTORY.hasFireBoots()) {
                 map.setTile(x, y, getCurrentTileBelow());
-                x = newX; y = newY;
+                x = newX; 
+                y = newY;
                 setCurrentTileBelow(tile);
                 map.setTile(x, y, Chip.CHIP);
                 return "moved";
             } else {
                 map.setTile(x, y, getCurrentTileBelow());
-                x = newX; y = newY;
+                x = newX; 
+                y = newY;
                 setCurrentTileBelow(tile);
                 map.setTile(x, y, Chip.CHIP);
                 die();

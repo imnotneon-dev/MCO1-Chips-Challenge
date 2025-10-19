@@ -71,7 +71,8 @@ public class Tiles {
             char tileUnder = map.getTile(chip.getX(), chip.getY());
             if (!isForceTile(tileUnder)) {
                 tileUnder = chip.getCurrentTileBelow();
-                if (!isForceTile(tileUnder)) break;
+                if (!isForceTile(tileUnder)) 
+                    break;
             }
 
             int oldX = chip.getX();
@@ -80,14 +81,24 @@ public class Tiles {
             int newY = oldY;
 
             switch (tileUnder) {
-                case FORCE_UP:    newY--; break;
-                case FORCE_DOWN:  newY++; break;
-                case FORCE_LEFT:  newX--; break;
-                case FORCE_RIGHT: newX++; break;
-                default: break;
+                case FORCE_UP:    
+                    newY--; 
+                    break;
+                case FORCE_DOWN:  
+                    newY++; 
+                    break;
+                case FORCE_LEFT:  
+                    newX--; 
+                    break;
+                case FORCE_RIGHT: 
+                    newX++; 
+                    break;
+                default: 
+                    break;
             }
 
-            if (!map.inBounds(newX, newY)) break;
+            if (!map.inBounds(newX, newY)) 
+                break;
 
             char nextTile = map.getTile(newX, newY);
 
@@ -127,7 +138,8 @@ public class Tiles {
             map.setTile(newX, newY, Chip.CHIP);
 
             // continue sliding only if the tile we just moved onto is a force tile
-            if (!isForceTile(nextTile)) break;
+            if (!isForceTile(nextTile)) 
+                break;
         }
     }
 }
