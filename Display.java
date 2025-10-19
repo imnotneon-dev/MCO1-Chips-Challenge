@@ -34,6 +34,7 @@ public class Display {
         System.out.println("\nHOW TO PLAY:");
         System.out.println("W/A/S/D - move");
         System.out.println("Collect all chips to unlock the exit!");
+        System.out.println("Collect colored keys to unlock colored doors!"); //added instruction
         System.out.println("Avoid fire and water unless you have items!");
         System.out.println();
     }
