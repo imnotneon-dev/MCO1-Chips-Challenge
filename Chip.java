@@ -19,11 +19,20 @@ public class Chip {
         int newY = y;
 
         switch (direction) {
-            case 'W': newY--; break;
-            case 'A': newX--; break;
-            case 'S': newY++; break;
-            case 'D': newX++; break;
-            default: return "invalid";
+            case 'W': 
+                newY--; 
+                break;
+            case 'A': 
+                newX--; 
+                break;
+            case 'S': 
+                newY++; 
+                break;
+            case 'D': 
+                newX++; 
+                break;
+            default: 
+                return "invalid";
         }
 
         if (!map.inBounds(newX, newY))
@@ -56,11 +65,21 @@ public class Chip {
 
             if (Tiles.isCollectible(tile)) {
                 switch (tile) {
-                    case Tiles.CHIP: INVENTORY.addChips(); break;
-                    case Tiles.RED_KEY: INVENTORY.addRedKey(); break;
-                    case Tiles.BLUE_KEY: INVENTORY.addBlueKey(); break;
-                    case Tiles.FIRE_BOOTS: INVENTORY.addFireBoots(); break;
-                    case Tiles.FLIPPERS: INVENTORY.addFlippers(); break;
+                    case Inventory.CHIP: 
+                        INVENTORY.addChips(); 
+                        break;
+                    case Inventory.RED_KEY: 
+                        INVENTORY.addRedKey(); 
+                        break;
+                    case Inventory.BLUE_KEY: 
+                        INVENTORY.addBlueKey();
+                        break;
+                    case Inventory.FIRE_BOOTS:
+                        INVENTORY.addFireBoots(); 
+                        break;
+                    case Inventory.FLIPPERS:
+                        INVENTORY.addFlippers();
+                        break;
                 }
                 setCurrentTileBelow(Tiles.BLANK);
                 map.setTile(x, y, Tiles.BLANK);
@@ -126,19 +145,19 @@ public class Chip {
 
     public void collect(char item) { // collect method
         switch(item) {
-            case Tiles.CHIP:
+            case Inventory.CHIP:
                 INVENTORY.addChips();;
                 break;
-            case Tiles.RED_KEY:
+            case Inventory.RED_KEY:
                 INVENTORY.addRedKey();;
                 break;
-            case Tiles.BLUE_KEY:
+            case Inventory.BLUE_KEY:
                 INVENTORY.addBlueKey();
                 break;
-            case Tiles.FIRE_BOOTS:
+            case Inventory.FIRE_BOOTS:
                 INVENTORY.addFireBoots();
                 break;
-            case Tiles.FLIPPERS:
+            case Inventory.FLIPPERS:
                 INVENTORY.addFlippers();
                 break;
         }

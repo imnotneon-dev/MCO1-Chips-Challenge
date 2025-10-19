@@ -1,9 +1,9 @@
 public class Doors {
 
-    private final char RED = 'R';
-    private final char BLUE = 'B';
     private boolean locked;
     private char color;
+    public static final char RED_DOOR = 'R';
+    public static final char BLUE_DOOR = 'B';
 
     public Doors(char color) {
         this.locked = true;
@@ -11,7 +11,7 @@ public class Doors {
     }
 
     public boolean isDoor(char tile) {
-        return tile == RED || tile == BLUE;
+        return tile == RED_DOOR || tile == BLUE_DOOR;
     }
 
     public boolean isLocked() {
@@ -19,12 +19,12 @@ public class Doors {
     }
 
     public boolean unlockDoor(Inventory inv, char tile) {
-        if (tile == RED && inv.hasRedKey()) {
+        if (tile == RED_DOOR && inv.hasRedKey()) {
             inv.useRedKey();
             locked = false;
             return true;
         }
-        else if (tile == BLUE && inv.hasBlueKey()) {
+        else if (tile == BLUE_DOOR && inv.hasBlueKey()) {
             inv.useBlueKey();
             locked = false;
             return true;            

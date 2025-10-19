@@ -3,6 +3,7 @@ public class NextLevel {
     private int currentLevel;
     private Maps[] levels;
     private int[] requiredChips;
+    public static final char EXIT = 'E';
 
     public NextLevel(Maps[] levels, int[] requiredChips) {
         this.levels = levels;

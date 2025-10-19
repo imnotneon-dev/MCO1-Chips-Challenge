@@ -1,30 +1,4 @@
 public class Levels {
-    
-    /*
-        Tiles
-        @ - chip starting point
-        X - wall tile
-        # - chips
-        ' ' - blank tile
-        W - water tile
-        F - fire tile
-        ^ - force up tile
-        < - force left tile
-        > - force right tile
-        v - force down tile
-        E - exit tile
-        
-        Doors
-        R - red door
-        B - blue door 
-
-        Items
-        r - red key
-        b - blue key
-        _ - flippers
-        L - fire boots
-        
-    */
 
     private char[][] map;
     private int chips;
@@ -57,8 +31,8 @@ public class Levels {
     public static Levels generateMap2() {
         char[][] grid = {
             {'X','X','X','X','X','X','X','X','X'},
-            {'X','E','F','F','v','W','W','L','X'},
-            {'X','F','F','F','v','W','X','X','X'},
+            {'X','E',' ','F','v','W','W','L','X'},
+            {'X',' ',' ','F','v','W','X','X','X'},
             {'X','F','F','F','v','W','W','W','X'},
             {'X','#','<','<','#','X','X','#','X'},
             {'X','>','v','^','v','W','W','W','X'},

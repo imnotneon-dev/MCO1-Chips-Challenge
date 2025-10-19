@@ -4,34 +4,27 @@ public class Tiles {
     public static final char WATER = 'W';
     public static final char FIRE = 'F';
     public static final char WALL = 'X';
-    public static final char CHIP = '#';
     public static final char EXIT = 'E';
     public static final char FORCE_UP = '^';
     public static final char FORCE_DOWN = 'v';
     public static final char FORCE_LEFT = '<';
     public static final char FORCE_RIGHT = '>';
-    public static final char RED_DOOR = 'R';
-    public static final char BLUE_DOOR = 'B';
-    public static final char RED_KEY = 'r';
-    public static final char BLUE_KEY = 'b';
-    public static final char FLIPPERS = '_'; //swapped flippers and fire_boots due to error before
-    public static final char FIRE_BOOTS = 'L';
 
     public static boolean isWalkable(char tile, Inventory inv, int requiredChips) {
         
         switch(tile) {
             case BLANK:
-            case CHIP:
+            case Inventory.CHIP:
             case FORCE_UP:
             case FORCE_DOWN:
             case FORCE_LEFT:
             case FORCE_RIGHT:
-            case RED_KEY:
-            case BLUE_KEY:
-            case FLIPPERS:
-            case FIRE_BOOTS:
-            case RED_DOOR:
-            case BLUE_DOOR:
+            case Inventory.RED_KEY:
+            case Inventory.BLUE_KEY:
+            case Inventory.FLIPPERS:
+            case Inventory.FIRE_BOOTS:
+            case Doors.RED_DOOR:
+            case Doors.BLUE_DOOR:
                 return true;
             case WATER:
                 return inv.hasFlippers();
@@ -51,7 +44,7 @@ public class Tiles {
     }
 
     public static boolean isCollectible(char tile) {
-        return tile == CHIP || tile == RED_KEY || tile == BLUE_KEY || tile == FLIPPERS || tile == FIRE_BOOTS;
+        return tile == Inventory.CHIP || tile == Inventory.RED_KEY || tile == Inventory.BLUE_KEY || tile == Inventory.FLIPPERS || tile == Inventory.FIRE_BOOTS;
     }
 
     public static char getForceDirection(char tile) {
@@ -114,11 +107,21 @@ public class Tiles {
 
             if (isCollectible(nextTile)) { //collects anything if forced
                 switch (nextTile) {
-                    case CHIP -> chip.getInventory().addChips();
-                    case RED_KEY -> chip.getInventory().addRedKey();
-                    case BLUE_KEY -> chip.getInventory().addBlueKey();
-                    case FLIPPERS -> chip.getInventory().addFlippers();
-                    case FIRE_BOOTS -> chip.getInventory().addFireBoots();
+                    case Inventory.CHIP:
+                        chip.getInventory().addChips();
+                        break;
+                    case Inventory.RED_KEY:
+                        chip.getInventory().addRedKey();
+                        break;
+                    case Inventory.BLUE_KEY:
+                        chip.getInventory().addBlueKey();
+                        break;
+                    case Inventory.FLIPPERS:
+                        chip.getInventory().addFlippers();
+                        break;
+                    case Inventory.FIRE_BOOTS:
+                        chip.getInventory().addFireBoots();
+                        break;
                 }
                 chip.setCurrentTileBelow(BLANK);
                 map.setTile(newX, newY, BLANK);

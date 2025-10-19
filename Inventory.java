@@ -5,6 +5,11 @@ public class Inventory {
     private boolean hasFlippers;
     private boolean hasFireBoots;
     private int chips = 0;
+    public static final char CHIP = '#';
+    public static final char RED_KEY = 'r';
+    public static final char BLUE_KEY = 'b';
+    public static final char FLIPPERS = '_'; //swapped flippers and fire_boots due to error before
+    public static final char FIRE_BOOTS = 'L';
 
     public Inventory() {
         hasFireBoots = false;
