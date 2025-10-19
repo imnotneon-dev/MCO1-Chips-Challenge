@@ -4,7 +4,8 @@ public class Chip {
     private int x;
     private int y;
     private boolean alive;
-    private final Inventory INVENTORY;  
+    private final Inventory INVENTORY;
+    private char currentTileBelow = Tiles.BLANK; // added this to keep water and fire tiles as well as force tiles     
     
     public Chip(int startX, int startY) {
         this.x = startX;
@@ -13,25 +14,16 @@ public class Chip {
         this.INVENTORY = new Inventory(); 
     }
 
-    public String move(char direction, Maps map) {
+    public String move(char direction, Maps map) { //implemented new code to help simulate movement with special tiles
         int newX = x;
         int newY = y;
 
         switch (direction) {
-            case 'W':
-                newY--;
-                break;
-            case 'A': 
-                newX--;
-                break;
-            case 'S': 
-                newY++; 
-                break;
-            case 'D': 
-                newX++; 
-                break;
-            default: 
-                return "invalid";
+            case 'W': newY--; break;
+            case 'A': newX--; break;
+            case 'S': newY++; break;
+            case 'D': newX++; break;
+            default: return "invalid";
         }
 
         if (!map.inBounds(newX, newY))
@@ -39,47 +31,93 @@ public class Chip {
 
         char tile = map.getTile(newX, newY);
 
-        Doors door = new Doors(tile);
+        Doors door = new Doors(tile); //door method unchanged in order to simulate removing doors upon entering with a key
         if (door.isDoor(tile)) {
             if (door.unlockDoor(INVENTORY, tile)) {
                 map.setTile(newX, newY, Tiles.BLANK);
+                tile = Tiles.BLANK;
             } else {
                 return "blocked";
             }
         }
-        
+
         if (tile == Tiles.EXIT) {
-            if (INVENTORY.getChips() >= map.getRequiredChips()) {
-                return "exit";
-            } else {
-                return "blocked";
-            }
+            if (INVENTORY.getChips() >= map.getRequiredChips()) return "exit";
+            else return "blocked";
         }
 
         if (Tiles.isWalkable(tile, INVENTORY, map.getRequiredChips())) {
-            map.setTile(x, y, Tiles.BLANK);
+            map.setTile(x, y, getCurrentTileBelow());
+
             x = newX;
             y = newY;
 
+            setCurrentTileBelow(tile);
+
             if (Tiles.isCollectible(tile)) {
-                collect(tile);
+                switch (tile) {
+                    case Tiles.CHIP: INVENTORY.addChips(); break;
+                    case Tiles.RED_KEY: INVENTORY.addRedKey(); break;
+                    case Tiles.BLUE_KEY: INVENTORY.addBlueKey(); break;
+                    case Tiles.FIRE_BOOTS: INVENTORY.addFireBoots(); break;
+                    case Tiles.FLIPPERS: INVENTORY.addFlippers(); break;
+                }
+                setCurrentTileBelow(Tiles.BLANK);
+                map.setTile(x, y, Tiles.BLANK);
             }
 
-            map.setTile(newX, newY, Chip.CHIP);
-            Tiles.applyForce(this, map);
+            map.setTile(x, y, Chip.CHIP);
 
-            return "moved";
+            if (Tiles.isForceTile(tile)) {
+                Tiles.applyForce(this, map);
+            }
+
+            return isAlive() ? "moved" : "died";
         }
 
-        if (tile == Tiles.WATER || tile == Tiles.FIRE) {
-            die();
-            return "died";
+    //implemented to not destroy water and fire tiles upon steps
+
+        if (tile == Tiles.WATER) {
+            if (INVENTORY.hasFlippers()) {
+                map.setTile(x, y, getCurrentTileBelow());
+                x = newX; y = newY;
+                setCurrentTileBelow(tile);
+                map.setTile(x, y, Chip.CHIP);
+                return "moved";
+            } else {
+                map.setTile(x, y, getCurrentTileBelow());
+                x = newX; y = newY;
+                setCurrentTileBelow(tile);
+                map.setTile(x, y, Chip.CHIP);
+                die();
+                map.setTile(x, y, tile); //restoring water tile
+                return "died";
+            }
+        }
+
+        if (tile == Tiles.FIRE) {
+            if (INVENTORY.hasFireBoots()) {
+                map.setTile(x, y, getCurrentTileBelow());
+                x = newX; y = newY;
+                setCurrentTileBelow(tile);
+                map.setTile(x, y, Chip.CHIP);
+                return "moved";
+            } else {
+                map.setTile(x, y, getCurrentTileBelow());
+                x = newX; y = newY;
+                setCurrentTileBelow(tile);
+                map.setTile(x, y, Chip.CHIP);
+                die();
+                map.setTile(x, y, tile); //restoring fire tile
+                return "died";
+            }
         }
 
         return "blocked";
     }
 
-    public void collect(char item) {
+
+    public void collect(char item) { // collect method
         switch(item) {
             case Tiles.CHIP:
                 INVENTORY.addChips();;
@@ -129,6 +167,14 @@ public class Chip {
    
     public Inventory getInventory() {
         return INVENTORY;
+    }
+
+    public char getCurrentTileBelow() {
+        return currentTileBelow;
+    }
+
+    public void setCurrentTileBelow(char tile) {
+        this.currentTileBelow = tile;
     }
 
 }
