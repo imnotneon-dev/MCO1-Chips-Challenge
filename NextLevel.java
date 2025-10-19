@@ -10,8 +10,8 @@ public class NextLevel {
         this.currentLevel = 0;
     }
 
-    public Maps getCurrentMap() {
-        return levels[currentLevel];
+    public Maps getCurrentMap() { //added the copyMap method
+        return levels[currentLevel].cloneMap();
     }
 
     public int getCurrentLevel() {
