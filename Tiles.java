@@ -14,8 +14,8 @@ public class Tiles {
     public static final char BLUE_DOOR = 'B';
     public static final char RED_KEY = 'r';
     public static final char BLUE_KEY = 'b';
-    public static final char FLIPPERS = 'L';
-    public static final char FIRE_BOOTS = '_';
+    public static final char FLIPPERS = '_'; //swapped flippers and fire_boots due to error before
+    public static final char FIRE_BOOTS = 'L';
 
     public static boolean isWalkable(char tile, Inventory inv, int requiredChips) {
         
@@ -66,48 +66,68 @@ public class Tiles {
         return ' ';
     }
 
-    public static void applyForce(Chip chip, Maps map) {
+    public static void applyForce(Chip chip, Maps map) { //implemented change regarding file/water tile not destoryed also force tiles
         while (true) {
-            char tile = map.getTile(chip.getX(), chip.getY());
-            if (!isForceTile(tile))
-                break;
+            char tileUnder = map.getTile(chip.getX(), chip.getY());
+            if (!isForceTile(tileUnder)) {
+                tileUnder = chip.getCurrentTileBelow();
+                if (!isForceTile(tileUnder)) break;
+            }
 
             int oldX = chip.getX();
             int oldY = chip.getY();
             int newX = oldX;
             int newY = oldY;
 
-            char direction = getForceDirection(tile);
-
-            switch (direction) {
-                case FORCE_UP:
-                    newY--;
-                    break;
-                case FORCE_DOWN:
-                    newY++;
-                    break;
-                case FORCE_LEFT:
-                    newX--;
-                    break;
-                case FORCE_RIGHT:
-                    newX++;
-                    break;
-                default:
-                    break;
+            switch (tileUnder) {
+                case FORCE_UP:    newY--; break;
+                case FORCE_DOWN:  newY++; break;
+                case FORCE_LEFT:  newX--; break;
+                case FORCE_RIGHT: newX++; break;
+                default: break;
             }
 
-            if (!map.inBounds(newX, newY))
+            if (!map.inBounds(newX, newY)) break;
+
+            char nextTile = map.getTile(newX, newY);
+
+            if (!isWalkable(nextTile, chip.getInventory(), map.getRequiredChips()))
                 break;
 
-            char next = map.getTile(newX, newY);
+            map.setTile(oldX, oldY, tileUnder);
 
-            if (!isWalkable(next, chip.getInventory(), map.getRequiredChips()))
-                break;
-
-            map.setTile(oldX, oldY, Tiles.BLANK);
             chip.setX(newX);
             chip.setY(newY);
+
+            chip.setCurrentTileBelow(nextTile);
+
+            if (isCollectible(nextTile)) { //collects anything if forced
+                switch (nextTile) {
+                    case CHIP -> chip.getInventory().addChips();
+                    case RED_KEY -> chip.getInventory().addRedKey();
+                    case BLUE_KEY -> chip.getInventory().addBlueKey();
+                    case FLIPPERS -> chip.getInventory().addFlippers();
+                    case FIRE_BOOTS -> chip.getInventory().addFireBoots();
+                }
+                chip.setCurrentTileBelow(BLANK);
+                map.setTile(newX, newY, BLANK);
+            }
+
+            if (nextTile == WATER && !chip.getInventory().hasFlippers()) {
+                chip.die();
+                map.setTile(newX, newY, WATER);
+                return;
+            }
+            if (nextTile == FIRE && !chip.getInventory().hasFireBoots()) {
+                chip.die();
+                map.setTile(newX, newY, FIRE);
+                return;
+            }
+
             map.setTile(newX, newY, Chip.CHIP);
+
+            // continue sliding only if the tile we just moved onto is a force tile
+            if (!isForceTile(nextTile)) break;
         }
     }
 }
