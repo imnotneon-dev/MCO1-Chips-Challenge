@@ -9,9 +9,21 @@ public class Tiles {
     public static final char FORCE_DOWN = 'v';
     public static final char FORCE_LEFT = '<';
     public static final char FORCE_RIGHT = '>';
+    private char type;
+
+    public Tiles(char type) {
+        this.type = type;
+    }
+
+    public char getType() {
+        return type;
+    }
+
+    public void setType(char newType) {
+        this.type = newType;
+    }
 
     public static boolean isWalkable(char tile, Inventory inv, int requiredChips) {
-        
         switch(tile) {
             case BLANK:
             case Inventory.CHIP:
