@@ -1,28 +1,96 @@
+/*
+ * The Tiles class represents all the tiles used in the map layouts, it is responsible for giving property of the special tiles including hazard tiles (water and fire), force tiles, and exit tiles. It is the one used by the Controller class (isWalkable) and Maps class to simulate the game and its objectives. 
+ * This class also handles the action of the force tiles when chip has stepped upon them, pushing him into the direction where the force tile has ended or an obstacle/hazard is the next tile.
+ * 
+ * This class works with the Chip class, Inventory class, Maps class, Doors class as it handles the movement and interaction and collision of chip to special and blank tiles
+ */
 public class Tiles {
-    
+    /*
+     * Blank tile where an empty space lies and chip can step on anytime
+     */
     public static final char BLANK = ' ';
+
+    /*
+     * Water tile and chip can only step on them if he has a flipper object in the inventory
+     */
     public static final char WATER = 'W';
+
+    /*
+     * Fire tile and chip can only step on them if he has a fire boots object in the inventory
+     */
     public static final char FIRE = 'F';
+
+    /*
+     * Wall tile where chip cannot pass on through, can also be used for setting map boundary
+     */
     public static final char WALL = 'X';
+
+    /*
+     * Exit tile where chip can only enter if he has collected all the required chips inside the map
+     */
     public static final char EXIT = 'E';
+
+    /*
+     * Force tile upwards, moving chip to the direction up or 'W'
+     */
     public static final char FORCE_UP = '^';
+
+    /*
+     * Force tile downwards, moving chip to the direction down or 'S'
+     */
     public static final char FORCE_DOWN = 'v';
+
+    /*
+     * Force tile left, moving chip to the direction left or 'A'
+     */
     public static final char FORCE_LEFT = '<';
+
+    /*
+     * Force tile right, moving chip to the direction right or 'D'
+     */
     public static final char FORCE_RIGHT = '>';
+
+    /*
+     * Indicates specific type of the tile
+     */
     private char type;
 
+    /*
+     * Constructor for the Tiles class with specified tile type
+     * 
+     * @param type - accepts character symbol that represents a tile type
+     */
     public Tiles(char type) {
         this.type = type;
     }
 
+    /*
+     * Gets the specific type of the tile
+     * 
+     * @return type - returns character type of tile
+     */
     public char getType() {
         return type;
     }
 
+    /*
+     * Sets the tile to a specific type
+     * 
+     * @param newType - the newType replacing the type inside
+     */
     public void setType(char newType) {
         this.type = newType;
     }
 
+    /*
+     * Has conditions if hazard tile has been stepped on, requires flippers/fire boots, enables collision on walls, logic for exit tile (chips) and rest of types is walkable
+     * 
+     * @param tile - specific type of tile that method accepts
+     * @param inv - current inventory of player
+     * @param requiredChips - required chips of current map
+     * @return true if satisfied inventory conditions / not wall
+     * @return false if conditions hasn't been met
+     */
     public static boolean isWalkable(char tile, Inventory inv, int requiredChips) {
         switch(tile) {
             case BLANK:
@@ -51,14 +119,38 @@ public class Tiles {
         }
     }
 
+    /*
+     * Determines if tile is a force tile
+     * 
+     * @param tile - accepts tile
+     * @return true - if tile parameter is a force tile
+     * @return false - if not a force tile
+     */
     public static boolean isForceTile(char tile) {
         return tile == FORCE_UP || tile == FORCE_DOWN || tile == FORCE_LEFT || tile == FORCE_RIGHT;
     }
 
+    /*
+     * Determines if the tile is a collectible
+     * 
+     * @param tile - accepts tile
+     * @return true if tile is chip/key/fireboots/flippers
+     * @return false if tile is not a collectible
+     */
     public static boolean isCollectible(char tile) {
         return tile == Inventory.CHIP || tile == Inventory.RED_KEY || tile == Inventory.BLUE_KEY || tile == Inventory.FLIPPERS || tile == Inventory.FIRE_BOOTS;
     }
 
+    /*
+     * Gets the direction of the force tile
+     * 
+     * @param tile - accepts tile
+     * @return FORCE_UP if tile is a FORCE_UP
+     * @return FORCE_DOWN if tile is a FORCE_DOWN
+     * @return FORCE_LEFT if tile is a FORCE_LEFT
+     * @return FORCE_RIGHT if tile is a FORCE_RIGHT
+     * @return '' if tile is not a force tile
+     */
     public static char getForceDirection(char tile) {
         if (tile == FORCE_UP) 
             return FORCE_UP;
@@ -71,7 +163,13 @@ public class Tiles {
         return ' ';
     }
 
-    public static void applyForce(Chip chip, Maps map) { //implemented change regarding file/water tile not destoryed also force tiles
+    /*
+     * Method for force tiles, applies force depending on the direction of the force tile and places chip where force tiles end or if next tile is a wall or hazard. This method also allows the collection of items when the force tile puts chip into their tile.
+     * @param chip - accepts chip and current position of chip
+     * @param map - accepts map layout and used to determine where to place chip
+     * @return if chip dies else sets tiles to the force tile ending position
+     */
+    public static void applyForce(Chip chip, Maps map) {
         while (true) {
             char tileUnder = map.getTile(chip.getX(), chip.getY());
             if (!isForceTile(tileUnder)) {
@@ -117,7 +215,7 @@ public class Tiles {
 
             chip.setCurrentTileBelow(nextTile);
 
-            if (isCollectible(nextTile)) { //collects anything if forced
+            if (isCollectible(nextTile)) { 
                 switch (nextTile) {
                     case Inventory.CHIP:
                         chip.getInventory().addChips();
@@ -151,8 +249,6 @@ public class Tiles {
             }
 
             map.setTile(newX, newY, Chip.CHIP);
-
-            // continue sliding only if the tile we just moved onto is a force tile
             if (!isForceTile(nextTile)) 
                 break;
         }
