@@ -99,8 +99,7 @@ public class Inventory {
     /**
     * Determines if chip has a single red key
     * 
-    * @return true - if red keys are currently 1 or more
-    * @return false - if red keys are 0
+    * @return true - if red keys are currently 1 or more, false - if red keys are 0
     */
     public boolean hasRedKey() {
         return redKeys > 0;
@@ -109,8 +108,7 @@ public class Inventory {
     /**
     * Determines if chip has a single blue key
     * 
-    * @return true - if blue keys are currently 1 or more
-    * @return false - if blue keys are 0
+    * @return true - if blue keys are currently 1 or more, false - if blue keys are 0
     */
     public boolean hasBlueKey() {
         return blueKeys > 0;
@@ -119,8 +117,7 @@ public class Inventory {
     /**
     * Determines if chip has a flipper
     * 
-    * @return true - if chip has a flipper object in the inventory
-    * @return false - if not
+    * @return true - if chip has a flipper object in the inventory, false - if not
     */
     public boolean hasFlippers() {
         return hasFlippers;
@@ -129,8 +126,7 @@ public class Inventory {
     /**
     * Determines if chip has a fire boots
     * 
-    * @return true - if chip has a fire boots object in the inventory
-    * @return false - if not
+    * @return true - if chip has a fire boots object in the inventory, false - if not 
     */
     public boolean hasFireBoots() {
         return hasFireBoots;

@@ -52,6 +52,7 @@ public class Maps {
 
     /**
      * Finds the starting position for chip to spawn in depending on the map. If the method detects '@', it has found chip and sets the starting position on chip's position.
+     * @return int[] - returns an array consisting of the starting x and y coordinates
      */
     public int[] findStartPosition() {
         for (int y = 0; y < tiles.length; y++) {
@@ -67,6 +68,7 @@ public class Maps {
 
     /**
      * Responsible for cloning a map for purposes of restarting a level upon player death.
+     * 
      * @return - returns the original state of the map for the player to use once the level has restarted
      */
     public Maps cloneMap() { 
@@ -133,8 +135,7 @@ public class Maps {
      * 
      * @param x - the x-coordinate to check
      * @param y - the y-coordinate to check
-     * @return true - if the coordinates are still inside the map
-     * @return false - if the coordinates are outside the map
+     * @return true - if the coordinates are still inside the map, false - if the coordinates are outside the map
      */
     public boolean inBounds(int x, int y) {
         return x >= 0 && x < tiles[0].length && y >= 0 && y < tiles.length;

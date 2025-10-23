@@ -39,8 +39,7 @@ public class Doors {
      * Checks if the next tile that chip will step upon is a door object, can be blue or red door
      * 
      * @param tile - accepts tile and checks if it is a door of either color 
-     * @return true - if tile is either a blue or red door
-     * @return false - if not a door
+     * @return true - if tile is either a blue or red door, false - if not a door
      */
     public boolean isDoor(char tile) {
         return tile == RED_DOOR || tile == BLUE_DOOR;
@@ -49,8 +48,7 @@ public class Doors {
     /**
      * Checks if the door that chip is interacting with is locked
      * 
-     * @return true = if door is locked
-     * @return false = if door is unlocked
+     * @return true = if door is locked, false = if door is unlocked 
      */
     public boolean isLocked() {
         return locked;
@@ -61,8 +59,7 @@ public class Doors {
      * 
      * @param inv - checks the current state of chip's inventory
      * @param tile - checks the tile if it is a door object
-     * @return true = if the specific conditions are met (door object and possessing key)
-     * @return false = if the specific conditions are not met by both red and blue door checking
+     * @return true = if the specific conditions are met (door object and possessing key), false = if the specific conditions are not met by both red and blue door checking
      */
     public boolean unlockDoor(Inventory inv, char tile) {
         if (tile == RED_DOOR && inv.hasRedKey()) {

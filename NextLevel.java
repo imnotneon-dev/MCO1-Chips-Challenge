@@ -48,8 +48,7 @@ public class NextLevel {
     /**
      * Accepts the collected chips of the player and decides if the player gets to pass or not.
      * @param collectedChips - current collection of chips by the player
-     * @return true if collected chips are equal to the required chips of the current level
-     * @return false if not
+     * @return true if collected chips are equal to the required chips of the current level, false if not
      */
     public boolean canAdvance(int collectedChips) {
         if (currentLevel >= requiredChips.length) 
@@ -60,8 +59,7 @@ public class NextLevel {
     /**
      * Mainly for the transitioning of levels of the game. 
      * It increments the current level therefore it advances the player to the next level
-     * @return true - if the current level is still within length (1/2)
-     * @return false - if the current level is already max (3)
+     * @return true - if the current level is still within length (1/2), false - if the current level is already max (3)
      */
     public boolean advance() {
         if (currentLevel + 1 < levels.length) {

@@ -261,8 +261,8 @@ public class Chip {
 
     /**
      * Returns whether Chip is alive/dead
-     * @return true if alive = 'true'
-     * @return false if alive = 'false'
+     * 
+     * @return true if alive = 'true', false if alive = 'false'
      */
     public boolean isAlive() {
         return alive;

@@ -88,8 +88,7 @@ public class Tiles {
      * @param tile - specific type of tile that method accepts
      * @param inv - current inventory of player
      * @param requiredChips - required chips of current map
-     * @return true if satisfied inventory conditions / not wall
-     * @return false if conditions hasn't been met
+     * @return true if satisfied inventory conditions / not wall, false if conditions hasn't been met
      */
     public static boolean isWalkable(char tile, Inventory inv, int requiredChips) {
         switch(tile) {
@@ -123,8 +122,7 @@ public class Tiles {
      * Determines if tile is a force tile
      * 
      * @param tile - accepts tile
-     * @return true - if tile parameter is a force tile
-     * @return false - if not a force tile
+     * @return true - if tile parameter is a force tile, false - if not a force tile
      */
     public static boolean isForceTile(char tile) {
         return tile == FORCE_UP || tile == FORCE_DOWN || tile == FORCE_LEFT || tile == FORCE_RIGHT;
@@ -134,8 +132,7 @@ public class Tiles {
      * Determines if the tile is a collectible
      * 
      * @param tile - accepts tile
-     * @return true if tile is chip/key/fireboots/flippers
-     * @return false if tile is not a collectible
+     * @return true if tile is chip/key/fireboots/flippers, false if tile is not a collectible
      */
     public static boolean isCollectible(char tile) {
         return tile == Inventory.CHIP || tile == Inventory.RED_KEY || tile == Inventory.BLUE_KEY || tile == Inventory.FLIPPERS || tile == Inventory.FIRE_BOOTS;
@@ -145,11 +142,7 @@ public class Tiles {
      * Gets the direction of the force tile
      * 
      * @param tile - accepts tile
-     * @return FORCE_UP if tile is a FORCE_UP
-     * @return FORCE_DOWN if tile is a FORCE_DOWN
-     * @return FORCE_LEFT if tile is a FORCE_LEFT
-     * @return FORCE_RIGHT if tile is a FORCE_RIGHT
-     * @return '' if tile is not a force tile
+     * @return FORCE_UP if tile is a FORCE_UP, FORCE_DOWN if tile is a FORCE_DOWN, FORCE_LEFT if tile is a FORCE_LEFT, FORCE_RIGHT if tile is a FORCE_RIGHT, '' if tile is not a force tile
      */
     public static char getForceDirection(char tile) {
         if (tile == FORCE_UP) 
@@ -167,7 +160,6 @@ public class Tiles {
      * Method for force tiles, applies force depending on the direction of the force tile and places chip where force tiles end or if next tile is a wall or hazard. This method also allows the collection of items when the force tile puts chip into their tile.
      * @param chip - accepts chip and current position of chip
      * @param map - accepts map layout and used to determine where to place chip
-     * @return if chip dies else sets tiles to the force tile ending position
      */
     public static void applyForce(Chip chip, Maps map) {
         while (true) {
