@@ -9,6 +9,11 @@ public class Controller {
     private Scanner sc = new Scanner(System.in);
     private NextLevel nextLevel;
 
+    /**
+     * Constructor for Controller class initializes levels and nextLevel manager.
+     * Sets up the game levels using predefined maps.
+     */
+    
     public Controller() {
         levels = new Maps[] {
             new Maps(Levels.generateMap1().getMap(), Levels.generateMap1().getChips()),
