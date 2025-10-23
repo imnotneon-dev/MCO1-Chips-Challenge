@@ -1,27 +1,27 @@
-/*
+/**
  * The Maps class is the one who handles the playable map in the game.
  * Each map has a 2d array of tiles and those tiles correspond to different collectibles(keys/equipment/chips) or walls for in bounds control or hazards and doors or it can be blank. This map class also is in charge of the requiredChips in order to pass the map layout and move on to the next level, the map is constantly updated when chip/player interacts with different objects.
  * It also is responsible for cloning a map upon resetting a level and storing the start position of the player.
  */
 public class Maps {
-    /*
+    /**
      * 2d array consisting of tiles that represents the layout of the map, it is from made with the Tiles class
      */
     private Tiles[][] tiles; 
-    /*
+    /**
      * requiredChips the player needs to acquire to move on to the next map/level
      */
     private int requiredChips; 
-    /*
+    /**
      * Coordinate for the starting position of the x-coordinate
      */
     private int startX;
-    /*
+    /**
      * Coordinate for the starting position of the y-coordinate
      */
     private int startY;
 
-    /*
+    /**
      * Constructor for the Maps class and it creates the Map upon accepting tiles and required chips
      * Also handles on getting the starting position of the map for chip to spawn in
      * 
@@ -34,7 +34,7 @@ public class Maps {
         findStartPosition();
     }
 
-    /*
+    /**
      * Used by the constructor and is the one responsible for creating new tiles inside the map, different types of tiles will be created upon getting the      source of the 2d array
      * 
      * @param source - accepts 2d array layout for creation
@@ -50,7 +50,7 @@ public class Maps {
         return newTiles;
     }
 
-    /*
+    /**
      * Finds the starting position for chip to spawn in depending on the map. If the method detects '@', it has found chip and sets the starting position on chip's position.
      */
     public int[] findStartPosition() {
@@ -65,7 +65,7 @@ public class Maps {
         return new int[] {startX, startY};
     }
 
-    /*
+    /**
      * Responsible for cloning a map for purposes of restarting a level upon player death.
      * @return - returns the original state of the map for the player to use once the level has restarted
      */
@@ -74,7 +74,7 @@ public class Maps {
         return new Maps(newTiles, this.requiredChips);
     }
 
-    /*
+    /**
      * Returns the current 2d array of characters that represent the current map state of the game
      * 
      * @return charMap - 2d character array of the map layout
@@ -89,7 +89,7 @@ public class Maps {
         return charMap;
     }
 
-    /*
+    /**
      * Returns the tile type at the specific coordinate located
      * @param x - x-coordinate of tile
      * @param y - y-coordinate of tile
@@ -99,7 +99,7 @@ public class Maps {
         return tiles[y][x].getType(); 
     }
 
-    /*
+    /**
      * Sets the indicated x and y coordinate to the tile type accepted.
      * 
      * @param x - x-coordinate of tile
@@ -110,7 +110,7 @@ public class Maps {
         tiles[y][x].setType(tileType); 
     }
     
-    /*
+    /**
      * Returns the starting position of the x-coordinate of the map
      * 
      * @return startX - returns the x-coordinate
@@ -119,7 +119,7 @@ public class Maps {
         return startX;
     }
 
-    /*
+    /**
      * Returns the starting position of the y-coordinate of the map
      * 
      * @return startY - returns the y-coordinate
@@ -128,7 +128,7 @@ public class Maps {
         return startY;
     }
 
-    /*
+    /**
      * Checks the boundary rules of the map layout on if the coordinates are within the boundaries of the map
      * 
      * @param x - the x-coordinate to check
@@ -140,7 +140,7 @@ public class Maps {
         return x >= 0 && x < tiles[0].length && y >= 0 && y < tiles.length;
     }
 
-    /*
+    /**
      * Returns the required chips for the player to pass the map
      * 
      * @return requiredChips - returns required chips needed to progress
