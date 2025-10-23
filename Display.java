@@ -1,21 +1,21 @@
-/*
+/**
  * Imports java utility Scanner class for main menu / display input (start game, instructions of game, exit the program)
  */
 import java.util.Scanner;
 
-/*
+/**
  * This Display class manages all the text displayed on the player's console / terminal that shows the game/menu state. It handles the display of the menu, current map with chip and tiles, and the player's current inventory. 
  * 
  * This class works with other classes like Controller, Maps, and Inventory in order to show the player the current state of the game.
  */
 public class Display {
 
-    /*
+    /**
      * Scanner instance for menu options
      */
     private Scanner sc = new Scanner(System.in);
 
-    /*
+    /**
      * Method shows the player the main menu of the game, including start game, instructions manual, 
      * and exit program options, it will print invalid input if the player inputs an invalid number/character. 
      * It will call the method of the controller class startGame if the input is 1.
@@ -46,7 +46,7 @@ public class Display {
         }
     }
 
-    /*
+    /**
      * Responsible for showing the user the instructions of the game, on how to play and the objectives, 
      * this is triggered when the user inputs 2 on the main menu.
      */
@@ -59,7 +59,7 @@ public class Display {
         System.out.println();
     }
 
-    /*
+    /**
      * Displaying the current map and its state 
      * Each tile is printed to display the map board
      * 
@@ -75,7 +75,7 @@ public class Display {
         System.out.println();
     }
 
-    /*
+    /**
      * Shows the current state of the player's inventory, if the player has colored keys, fire boot or flippers, and shows the player the chips they have acquired for them to exit the level.
      * 
      * @param inventory - gets the current inventory of the player to display its current state
