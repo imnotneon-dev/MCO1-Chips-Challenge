@@ -1,9 +1,12 @@
 /**
- * This Levels class handles the layout of the maps inside the game. It currently has 3 levels and it is used by the Display class to show the map layouts and
+ *  Levels Class
+ * 
+ * - Handles the layout of the maps inside the game. It currently has 3 levels and it is used by the Display class to show the map layouts and
  * it is the one to show the tile characters, hazard(water/fire) tiles, doors, force tiles, collectibles, and exit tile.
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
-
 public class Levels {
+
     /**
      * 2d array to use for the layout, it is the one responsible to display the tile layout
      */
