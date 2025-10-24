@@ -1,10 +1,16 @@
+/**
+ *imports the java utility class Scanner for user input required for the navigation of menu
+ */
 import java.util.Scanner;
 
-    /**
-     * This Display class manages all the text displayed on the player's console / terminal that shows the game/menu state. 
-     * It handles the display of the menu, current map with chip and tiles, and the player's current inventory. 
-     * This class works with other classes like Controller, Maps, and Inventory in order to show the player the current state of the game.
-     */
+/**
+ * Display Class
+ *
+ * - Manages all the text displayed on the player's console / terminal that shows the game/menu state. 
+ * It handles the display of the menu, current map with chip and tiles, and the player's current inventory. 
+ * This class works with other classes like Controller, Maps, and Inventory in order to show the player the current state of the game.
+ * @author Jenrick Lim, Ryan Malapitan (S16)
+ */
 public class Display {
 
     /**
