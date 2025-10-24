@@ -1,6 +1,9 @@
 /**
- * The NextLevel class mainly handles the progression and transition of map/level based on the player. 
+ * NextLevel Class
+ * 
+ * - Handles the progression and transition of map/level based on the player. 
  * This class works with the Maps class and Levels class
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class NextLevel {
 
