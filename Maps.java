@@ -1,9 +1,13 @@
 /**
- * The Maps class is the one who handles the playable map in the game.
+ * Maps Class
+ * 
+ * - Handles the playable map in the game.
  * Each map has a 2d array of tiles and those tiles correspond to different collectibles(keys/equipment/chips) or walls for in bounds control or hazards and doors or it can be blank. This map class also is in charge of the requiredChips in order to pass the map layout and move on to the next level, the map is constantly updated when chip/player interacts with different objects.
  * It also is responsible for cloning a map upon resetting a level and storing the start position of the player.
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class Maps {
+
     /**
      * 2d array consisting of tiles that represents the layout of the map, it is from made with the Tiles class
      */
