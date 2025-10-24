@@ -1,10 +1,14 @@
 /**
- * The Doors class represent the door tiles the player can find in the game. Each door is a specific color and can be red or blue, to unlock/clear a door the player must possess the specific key in their inventory to pass through. 
+ * Doors Class
+ * 
+ * - Represent the door tiles the player can find in the game. Each door is a specific color and can be red or blue, to unlock/clear a door the player must possess the specific key in their inventory to pass through. 
  * This class handles locking doors upon starting game, unlocking when player has keys and checking if the key is correct.
  * 
  * Doors are represented by symbols with Red door = 'R' and Blue door = 'B'
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class Doors {
+
     /**
      * Indicates if the door is locked 'true' or unlocked 'false'
      */
