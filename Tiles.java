@@ -1,10 +1,14 @@
 /**
- * The Tiles class represents all the tiles used in the map layouts, it is responsible for giving property of the special tiles including hazard tiles (water and fire), force tiles, and exit tiles. It is the one used by the Controller class (isWalkable) and Maps class to simulate the game and its objectives. 
+ * Tiles Class
+ * 
+ * - Represents all the tiles used in the map layouts, it is responsible for giving property of the special tiles including hazard tiles (water and fire), force tiles, and exit tiles. It is the one used by the Controller class (isWalkable) and Maps class to simulate the game and its objectives. 
  * This class also handles the action of the force tiles when chip has stepped upon them, pushing him into the direction where the force tile has ended or an obstacle/hazard is the next tile.
  * 
  * This class works with the Chip class, Inventory class, Maps class, Doors class as it handles the movement and interaction and collision of chip to special and blank tiles
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class Tiles {
+
     /**
      * Blank tile where an empty space lies and chip can step on anytime
      */
