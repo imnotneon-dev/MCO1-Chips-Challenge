@@ -139,7 +139,8 @@ public class Maps {
      * 
      * @param x - the x-coordinate to check
      * @param y - the y-coordinate to check
-     * @return true - if the coordinates are still inside the map, false - if the coordinates are outside the map
+     * @return true - if the coordinates are still inside the map
+     * @return false - if the coordinates are outside the map
      */
     public boolean inBounds(int x, int y) {
         return x >= 0 && x < tiles[0].length && y >= 0 && y < tiles.length;
