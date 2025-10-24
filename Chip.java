@@ -1,14 +1,17 @@
 /** 
- * The Chip class represents the player in the game
+ * Chip Class
+ * 
+ * - Represents the player in the game
  * This class manages the player's position, inventory, interaction with other classes (collectibles, doors, hazard tiles, exit tile), 
  * and takes control of the movement of the player
  * 
  * This class tracks where the player is alive and it tracks the type of tile below it
  * 
  * This class interacts with other classes like Maps, Tiles, Doors, and Inventory to provide the simulation of the gameplay
+ * @author Jenrick Lim, Ryan Malapitan (S16)
 */
-
 public class Chip {
+
     /**
      *  The '@' character represents Chip / Player in the game 
      */
@@ -268,7 +271,7 @@ public class Chip {
         return alive;
     }
    
-    /**
+   /**
     * Returns chip's current inventory 
     * 
     * @return the current inventory of chip
@@ -277,7 +280,7 @@ public class Chip {
         return INVENTORY;
     }
 
-    /**
+   /**
     * Returns chip's current tile below him 
     * 
     * @return the character of the tile below
@@ -286,7 +289,7 @@ public class Chip {
         return currentTileBelow;
     }
 
-    /**
+   /**
     * Sets chip's current tile below him 
     * 
     * @param tile - the tile character to be set as the new one below chip
