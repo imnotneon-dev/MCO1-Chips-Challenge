@@ -1,16 +1,20 @@
 /**
  *imports the java utility class Scanner for user input required for the movement of Chip
-*/
+ */
 import java.util.Scanner;
 
 /**
- * The Controller class manages the flow of the game, this includes the player inputs, progression of levels leading to map transitions, and the game state.
+ * Controller Class
+ * 
+ * - Manages the flow of the game, this includes the player inputs, progression of levels leading to map transitions, and the game state.
  * 
  * It initializes the levels of the game and controls the main loop, it also handles chip's movement and interactions, and the level reset upon death or level progression.
  * 
  * This class interacts with other classes like Chip, Maps, NextLevel, Display, and Levels to simulate gameplay logic
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class Controller {
+
     /**
      * The array containing all the available game levels
      */
@@ -41,7 +45,7 @@ public class Controller {
      */
     private NextLevel nextLevel;
 
-    /***
+    /**
      * Constructor for Controller class initializes levels and nextLevel manager.
      * Sets up the game levels using predefined maps.
      */
@@ -81,30 +85,22 @@ public class Controller {
             System.out.print("Move (W/A/S/D, Q to quit): ");
             char move = sc.next().toUpperCase().charAt(0);
 
-            /**
-             * Player option if they want to quit
-             */
+            //Player option if they want to quit
             if (move == 'Q') {
                 System.out.println("Quitting to menu...");
                 break;
             }
 
-            /**
-             * Handles movement of chip
-             */
+            //Handles movement of chip
             String moved = chip.move(move, currentMap); 
             if (moved.equals("blocked")) {
                 System.out.println("Cannot move there!");
             }
 
-            /**
-             * gets current tile after chip moves / gets blocked
-             */
+            //Gets current tile after chip moves / gets blocked
             char currentTile = currentMap.getTile(chip.getX(), chip.getY());
 
-            /**
-             * For level completion
-             */
+            //For level completion
             if (moved.equals("exit") && nextLevel.canAdvance(chip.getInventory().getChips())) {
                 System.out.println("Level Complete!");
 
@@ -120,9 +116,7 @@ public class Controller {
                 }
             }
 
-            /**
-             * For resetting current level when chip dies
-             */
+            //For resetting current level when chip dies
             if (!chip.isAlive() && moved.equals("died")) {
                 System.out.println("You died! Restarting level..."); 
                 resetLevel(); 
