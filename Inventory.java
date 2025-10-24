@@ -1,8 +1,12 @@
 /**
- * This class is the available inventory of Chip, this class will change its attributes upon collection of items, reset of level, and interacting with doors
+ * Inventory Class
+ * 
+ * - The available inventory of Chip, this class will change its attributes upon collection of items, reset of level, and interacting with doors
  * This class features the use of characters to identify which item will be acquired in the inventory
+ * @author Jenrick Lim, Ryan Malapitan (S16)
  */
 public class Inventory {
+
     /**
      * Red keys to unlock red doors upon starting a game is set to 0 until chip finds one
      */
